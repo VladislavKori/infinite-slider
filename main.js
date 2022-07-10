@@ -43,3 +43,7 @@ slider.addEventListener(
   },
   false
 );
+
+window.onload = () => {
+  slider.style.display = 'flex'
+}
