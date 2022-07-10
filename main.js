@@ -1,15 +1,17 @@
 const slides = document.querySelector('.slide');
 
+console.log()
+
 // Init Slides
-const quantitySlide = 4;
-slides.style.width = `${4 * 100}%`
+const quantitySlide = document.querySelectorAll('.slide__container').length;
+slides.style.width = `${quantitySlide * 100}%`
 
 // Index Slide
 let slideIndex = 0;
 
 // move Slides Container
 const moveSlidesContainer = () => {
-    slides.style.left = `-${slideIndex * 100}%`; 
+    slides.style.transform = `translateX(-${slideIndex * (100/quantitySlide)}%)`; 
 }
 
 // move Handler
