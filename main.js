@@ -1,36 +1,45 @@
-const slides = document.querySelector('.slide');
-
-console.log()
+const carousel = document.querySelector(".slider");
+const slider = document.querySelector(".slide");
+const slideContainer = document.querySelectorAll(".slide__container");
+let direction = -1;
 
 // Init Slides
-const quantitySlide = document.querySelectorAll('.slide__container').length;
-slides.style.width = `${quantitySlide * 100}%`
+const quantitySlide = slideContainer.length;
+slider.style.width = `${quantitySlide * 100}%`;
 
-// Index Slide
-let slideIndex = 0;
-
-// move Slides Container
-const moveSlidesContainer = () => {
-    slides.style.transform = `translateX(-${slideIndex * (100/quantitySlide)}%)`; 
-}
-
-// move Handler
-const moveHandler = (direction) => {
-    if (slideIndex+1 === quantitySlide && direction === 'right' ) {slideIndex = 0; return moveSlidesContainer()}; 
-    if (slideIndex === 0 && !direction ) {slideIndex = quantitySlide - 1; return moveSlidesContainer()};
-    direction === 'right' ? slideIndex += 1 : slideIndex -= 1;
-    moveSlidesContainer();
-}
+const shiftProcent = 100 / quantitySlide;
 
 // Buttons
-document.querySelector('.next').addEventListener('click', e => {
-    moveHandler('right')
-})
+document.querySelector(".next").addEventListener("click", (e) => {
+  // Меняем направление
+  direction = -1;
+  carousel.style.justifyContent = "flex-start";
+  slider.style.transform = `translate(-${shiftProcent}%)`;
+});
 
-document.querySelector('.previos').addEventListener('click', e => {
-    moveHandler()
-})
+document.querySelector(".previos").addEventListener("click", (e) => {
+  if (direction === -1) {
+    direction = 1;
+    slider.appendChild(slider.firstElementChild);
+  }
+  carousel.style.justifyContent = "flex-end";
+  slider.style.transform = `translate(${shiftProcent}%)`;
+});
 
-setInterval( () => {
-    moveHandler('right')
-}, 2000)
+slider.addEventListener(
+  "transitionend",
+  function () {
+    if (direction === 1) {
+      slider.prepend(slider.lastElementChild);
+    } else {
+      slider.appendChild(slider.firstElementChild);
+    }
+
+    slider.style.transition = "none";
+    slider.style.transform = "translate(0)";
+    setTimeout(() => {
+      slider.style.transition = "all 0.5s";
+    });
+  },
+  false
+);
