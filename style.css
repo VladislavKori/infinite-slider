@@ -1,0 +1,51 @@
+* {margin: 0; padding: 0; box-sizing: border-box;}
+html, body {height: 100%;}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(23, 23, 23);
+}
+.slider {
+  box-shadow: 0 0 10px 5px rgba(62, 216, 255, 0.05);
+  width: 700px;
+  height: 400px; 
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.slider__manage {
+  position: absolute;
+  width: 100%;
+  top: calc(50% - 20px)
+}
+.btn {
+  position: absolute;
+  z-index: 2;
+} 
+.next {
+  right: 0;
+}
+
+.btn {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+.slide {
+  display: flex;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.7s ease-in-out;
+}
+.slide__container {
+  width: 100%;
+  background: #fff;
+  height: 100%;
+}
